@@ -1,6 +1,5 @@
-package com.cbr.university.controller_rest;
+package com.cbr.university.api;
 
-import com.cbr.university.model.Group;
 import com.cbr.university.service.BaseService;
 import com.cbr.university.validation.IdExistsInDb;
 import com.cbr.university.validation.group.Create;
@@ -25,22 +24,22 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("rest/groups")
 @Validated
-public class GroupRestController {
-    private final BaseService<Group> groupService;
+public class Group {
+    private final BaseService<com.cbr.university.model.Group> groupService;
 
     @GetMapping
-    public List<Group> getAll() {
+    public List<com.cbr.university.model.Group> getAll() {
         return groupService.getAll();
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Group add(@Validated(Create.class) @RequestBody Group group) {
+    public com.cbr.university.model.Group add(@Validated(Create.class) @RequestBody com.cbr.university.model.Group group) {
         return groupService.create(group);
     }
 
     @PutMapping
-    public Group update(@Validated(Update.class) @RequestBody Group group) {
+    public com.cbr.university.model.Group update(@Validated(Update.class) @RequestBody com.cbr.university.model.Group group) {
         return groupService.update(group);
     }
 

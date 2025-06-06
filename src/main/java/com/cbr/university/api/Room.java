@@ -1,6 +1,5 @@
-package com.cbr.university.controller_rest;
+package com.cbr.university.api;
 
-import com.cbr.university.model.Student;
 import com.cbr.university.service.BaseService;
 import com.cbr.university.validation.IdExistsInDb;
 import com.cbr.university.validation.group.Create;
@@ -23,32 +22,32 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("rest/students")
+@RequestMapping("rest/rooms")
 @Validated
-public class StudentRestController {
-    private final BaseService<Student> studentService;
+public class Room {
+    private final BaseService<com.cbr.university.model.Room> roomService;
 
     @GetMapping
-    public List<Student> getAll() {
-        return studentService.getAll();
+    public List<com.cbr.university.model.Room> getAll() {
+        return roomService.getAll();
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Student add(@Validated(Create.class) @RequestBody Student student) {
-        return studentService.create(student);
+    public com.cbr.university.model.Room add(@Validated(Create.class) @RequestBody com.cbr.university.model.Room room) {
+        return roomService.create(room);
     }
 
     @PutMapping
-    public Student update(@Validated(Update.class) @RequestBody Student student) {
-        return studentService.update(student);
+    public com.cbr.university.model.Room update(@Validated(Update.class) @RequestBody com.cbr.university.model.Room room) {
+        return roomService.update(room);
     }
 
     @DeleteMapping("{id}")
     public void delete(
-            @NotNull(message = "Request must include a Student id")
-            @IdExistsInDb(typeObject = "Student", message = "This Student id is not in the database")
+            @NotNull(message = "Request must include a Room id")
+            @IdExistsInDb(typeObject = "Room", message = "This Room id is not in the database")
             @PathVariable Integer id) {
-        studentService.deleteById(id);
+        roomService.deleteById(id);
     }
 }

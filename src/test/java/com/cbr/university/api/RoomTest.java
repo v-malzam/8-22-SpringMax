@@ -1,4 +1,4 @@
-package com.cbr.university.controller_rest;
+package com.cbr.university.api;
 
 import com.cbr.university.model.Room;
 import org.junit.jupiter.api.Test;
@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class RoomRestControllerTest {
+class RoomTest {
     private static final String URL_ROOMS = "/rest/rooms";
 
     @Autowired

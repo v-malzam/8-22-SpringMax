@@ -1,6 +1,5 @@
-package com.cbr.university.controller_rest;
+package com.cbr.university.api;
 
-import com.cbr.university.model.Room;
 import com.cbr.university.service.BaseService;
 import com.cbr.university.validation.IdExistsInDb;
 import com.cbr.university.validation.group.Create;
@@ -23,32 +22,32 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("rest/rooms")
+@RequestMapping("rest/teachers")
 @Validated
-public class RoomRestController {
-    private final BaseService<Room> roomService;
+public class Teacher {
+    private final BaseService<com.cbr.university.model.Teacher> teacherService;
 
     @GetMapping
-    public List<Room> getAll() {
-        return roomService.getAll();
+    public List<com.cbr.university.model.Teacher> getAll() {
+        return teacherService.getAll();
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Room add(@Validated(Create.class) @RequestBody Room room) {
-        return roomService.create(room);
+    public com.cbr.university.model.Teacher add(@Validated(Create.class) @RequestBody com.cbr.university.model.Teacher teacher) {
+        return teacherService.create(teacher);
     }
 
     @PutMapping
-    public Room update(@Validated(Update.class) @RequestBody Room room) {
-        return roomService.update(room);
+    public com.cbr.university.model.Teacher update(@Validated(Update.class) @RequestBody com.cbr.university.model.Teacher teacher) {
+        return teacherService.update(teacher);
     }
 
     @DeleteMapping("{id}")
     public void delete(
-            @NotNull(message = "Request must include a Room id")
-            @IdExistsInDb(typeObject = "Room", message = "This Room id is not in the database")
+            @NotNull(message = "Request must include a Teacher id")
+            @IdExistsInDb(typeObject = "Teacher", message = "This Teacher id is not in the database")
             @PathVariable Integer id) {
-        roomService.deleteById(id);
+        teacherService.deleteById(id);
     }
 }

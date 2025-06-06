@@ -1,6 +1,5 @@
-package com.cbr.university.controller_rest;
+package com.cbr.university.api;
 
-import com.cbr.university.model.ScheduleLine;
 import com.cbr.university.service.BaseService;
 import com.cbr.university.validation.IdExistsInDb;
 import com.cbr.university.validation.group.Create;
@@ -23,32 +22,32 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("rest/scheduleLines")
+@RequestMapping("rest/courses")
 @Validated
-public class ScheduleLineRestController {
-    private final BaseService<ScheduleLine> scheduleLineService;
+public class Course {
+    private final BaseService<com.cbr.university.model.Course> courseService;
 
     @GetMapping
-    public List<ScheduleLine> getAll() {
-        return scheduleLineService.getAll();
+    public List<com.cbr.university.model.Course> getAll() {
+        return courseService.getAll();
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ScheduleLine add(@Validated(Create.class) @RequestBody ScheduleLine scheduleLine) {
-        return scheduleLineService.create(scheduleLine);
+    public com.cbr.university.model.Course add(@Validated(Create.class) @RequestBody com.cbr.university.model.Course course) {
+        return courseService.create(course);
     }
 
     @PutMapping
-    public ScheduleLine update(@Validated(Update.class) @RequestBody ScheduleLine scheduleLine) {
-        return scheduleLineService.update(scheduleLine);
+    public com.cbr.university.model.Course update(@Validated(Update.class) @RequestBody com.cbr.university.model.Course course) {
+        return courseService.update(course);
     }
 
     @DeleteMapping("{id}")
     public void delete(
-            @NotNull(message = "Request must include a ScheduleLine id")
-            @IdExistsInDb(typeObject = "ScheduleLine", message = "This ScheduleLine id is not in the database")
+            @NotNull(message = "Request must include a Course id")
+            @IdExistsInDb(typeObject = "Course", message = "This Course id is not in the database")
             @PathVariable Integer id) {
-        scheduleLineService.deleteById(id);
+        courseService.deleteById(id);
     }
 }

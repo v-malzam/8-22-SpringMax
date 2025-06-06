@@ -1,6 +1,5 @@
-package com.cbr.university.controller_rest;
+package com.cbr.university.api;
 
-import com.cbr.university.model.Course;
 import com.cbr.university.service.BaseService;
 import com.cbr.university.validation.IdExistsInDb;
 import com.cbr.university.validation.group.Create;
@@ -23,32 +22,32 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("rest/courses")
+@RequestMapping("rest/students")
 @Validated
-public class CourseRestController {
-    private final BaseService<Course> courseService;
+public class Student {
+    private final BaseService<com.cbr.university.model.Student> studentService;
 
     @GetMapping
-    public List<Course> getAll() {
-        return courseService.getAll();
+    public List<com.cbr.university.model.Student> getAll() {
+        return studentService.getAll();
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Course add(@Validated(Create.class) @RequestBody Course course) {
-        return courseService.create(course);
+    public com.cbr.university.model.Student add(@Validated(Create.class) @RequestBody com.cbr.university.model.Student student) {
+        return studentService.create(student);
     }
 
     @PutMapping
-    public Course update(@Validated(Update.class) @RequestBody Course course) {
-        return courseService.update(course);
+    public com.cbr.university.model.Student update(@Validated(Update.class) @RequestBody com.cbr.university.model.Student student) {
+        return studentService.update(student);
     }
 
     @DeleteMapping("{id}")
     public void delete(
-            @NotNull(message = "Request must include a Course id")
-            @IdExistsInDb(typeObject = "Course", message = "This Course id is not in the database")
+            @NotNull(message = "Request must include a Student id")
+            @IdExistsInDb(typeObject = "Student", message = "This Student id is not in the database")
             @PathVariable Integer id) {
-        courseService.deleteById(id);
+        studentService.deleteById(id);
     }
 }
